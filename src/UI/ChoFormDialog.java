@@ -52,7 +52,11 @@ public class ChoFormDialog extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        pgbLoad.setForeground(new java.awt.Color(51, 51, 51));
+        pgbLoad.setBackground(new java.awt.Color(102, 0, 0));
+        pgbLoad.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        pgbLoad.setForeground(new java.awt.Color(30, 30, 30));
+        pgbLoad.setOpaque(true);
+        pgbLoad.setStringPainted(true);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/Screenshot 2024-07-26 140821.png"))); // NOI18N
 
@@ -68,8 +72,8 @@ public class ChoFormDialog extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pgbLoad, javax.swing.GroupLayout.DEFAULT_SIZE, 18, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(pgbLoad, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();

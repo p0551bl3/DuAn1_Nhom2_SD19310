@@ -27,6 +27,7 @@ public class LoginForm extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         new ChoFormDialog(this, true).setVisible(true);
         conn = db.getCon();
+        lblShowPass2.setVisible(false);
     }
     
     public void login(){
@@ -72,25 +73,38 @@ public class LoginForm extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel3 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
         txtUserName = new javax.swing.JTextField();
+        Password = new javax.swing.JPasswordField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        Password = new javax.swing.JPasswordField();
         btnDN = new javax.swing.JButton();
         btnThoai = new javax.swing.JButton();
+        lblShowpass = new javax.swing.JLabel();
+        lblShowPass2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/Picture1.png"))); // NOI18N
 
+        jPanel1.setBackground(new java.awt.Color(153, 0, 0));
+        jPanel1.setForeground(new java.awt.Color(255, 255, 255));
+
+        txtUserName.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         txtUserName.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jLabel1.setText("UserName");
-
-        jLabel2.setText("Password");
-
+        Password.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         Password.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel1.setText("UserName");
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel2.setText("Password");
+
+        btnDN.setBackground(new java.awt.Color(204, 51, 0));
+        btnDN.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnDN.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/icons8_login_30px.png"))); // NOI18N
         btnDN.setText("Đăng Nhập");
         btnDN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -98,6 +112,9 @@ public class LoginForm extends javax.swing.JFrame {
             }
         });
 
+        btnThoai.setBackground(new java.awt.Color(204, 51, 0));
+        btnThoai.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnThoai.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/icons8_Logout_30px_1.png"))); // NOI18N
         btnThoai.setText("Thoát");
         btnThoai.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -105,49 +122,83 @@ public class LoginForm extends javax.swing.JFrame {
             }
         });
 
+        lblShowpass.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/hide.png"))); // NOI18N
+        lblShowpass.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblShowpassMouseClicked(evt);
+            }
+        });
+
+        lblShowPass2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/show.png"))); // NOI18N
+        lblShowPass2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblShowPass2MouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(266, 266, 266))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addGap(68, 68, 68)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(Password, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblShowpass)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblShowPass2))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(btnDN, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnThoai)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(41, 41, 41)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Password, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2)
+                    .addComponent(lblShowPass2)
+                    .addComponent(lblShowpass))
+                .addGap(28, 28, 28)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnDN)
+                    .addComponent(btnThoai))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 428, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 422, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnDN)
-                        .addGap(66, 66, 66)
-                        .addComponent(btnThoai))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(txtUserName)
-                        .addComponent(Password, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(70, 70, 70)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(Password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))
-                        .addGap(27, 27, 27)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnDN)
-                            .addComponent(btnThoai))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 418, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -160,8 +211,47 @@ public class LoginForm extends javax.swing.JFrame {
 
     private void btnThoaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThoaiActionPerformed
         // TODO add your handling code here:
-        LoginForm.this.dispose();
+        int response =JOptionPane.showConfirmDialog(null, 
+            "Bạn có muốn thoát ứng dụng?", 
+            "Xác nhận thoát", 
+            JOptionPane.YES_NO_OPTION, 
+            JOptionPane.QUESTION_MESSAGE);
+        
+        // Kiểm tra phản hồi của người dùng
+        if (response == JOptionPane.YES_OPTION) {
+            // Thực hiện thoát ứng dụng nếu người dùng chọn Yes
+            System.exit(0);
+        } else {
+            // Thực hiện các hành động khác nếu người dùng chọn No
+            System.out.println("Ứng dụng tiếp tục chạy.");
+        }
     }//GEN-LAST:event_btnThoaiActionPerformed
+
+    private void lblShowpassMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblShowpassMouseClicked
+        // TODO add your handling code here:
+        if (this.getName() == "0") {
+            Password.setEchoChar((char)0);
+            this.setName("1");
+            lblShowpass.setVisible(false);
+            lblShowPass2.setVisible(true);
+        } else {
+            Password.setEchoChar('*');
+            this.setName("0");
+        }
+    }//GEN-LAST:event_lblShowpassMouseClicked
+
+    private void lblShowPass2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblShowPass2MouseClicked
+        // TODO add your handling code here:
+        if (this.getName() == "1") {
+            Password.setEchoChar('*');
+            this.setName("0");
+            lblShowPass2.setVisible(false);
+            lblShowpass.setVisible(true);
+        } else {
+            Password.setEchoChar((char) 0);
+            this.setName("1");
+        }
+    }//GEN-LAST:event_lblShowPass2MouseClicked
 
     /**
      * @param args the command line arguments
@@ -205,6 +295,9 @@ public class LoginForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lblShowPass2;
+    private javax.swing.JLabel lblShowpass;
     private javax.swing.JTextField txtUserName;
     // End of variables declaration//GEN-END:variables
 }
