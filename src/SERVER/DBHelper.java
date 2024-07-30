@@ -34,7 +34,7 @@ public class DBHelper {
     public DBHelper() {
        try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String url = "jdbc:sqlserver://localhost:1433;databaseName=StayCoffee2;user=sa;password=2khong1hai2khong0nam;encrypt=false ";
+            String url = "jdbc:sqlserver://localhost:1433;databaseName=StayCoffee2;user=sa;password=1;encrypt=true;trustServerCertificate=true";
             con = DriverManager.getConnection(url);
         } catch (ClassNotFoundException e) {
             JOptionPane.showMessageDialog(null, "Lỗi 100:: Không tìm thấy lớp");
