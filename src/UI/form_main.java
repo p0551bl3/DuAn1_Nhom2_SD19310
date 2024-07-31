@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.Timer;
+import UTIL.IconLogo;
 
 /**
  *
@@ -21,6 +22,7 @@ public class form_main extends javax.swing.JFrame {
      */
     public form_main() {
         initComponents();
+        IconLogo.setFrameIcon(this);
         setLocationRelativeTo(null);
         clock();
     }

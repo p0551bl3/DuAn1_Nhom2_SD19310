@@ -11,6 +11,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import javax.swing.*;
+import java.awt.*;
+import UTIL.IconLogo;
 /**
  *
  * @author User
@@ -24,6 +27,7 @@ public class LoginForm extends javax.swing.JFrame {
      */
     public LoginForm() {
         initComponents();
+        IconLogo.setFrameIcon(this);
         this.setLocationRelativeTo(null);
         new ChoFormDialog(this, true).setVisible(true);
         conn = db.getCon();
