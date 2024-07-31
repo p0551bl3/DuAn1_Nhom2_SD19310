@@ -47,9 +47,9 @@ public class KhuyenMai extends javax.swing.JFrame {
                 fillEmployeeDetails(row);
             }
         });
-        
+                        txtmakhuyenmai.setEnabled(false);
+
     }
-    
     
     void fillDataTable(){
         DefaultTableModel model = (DefaultTableModel) tblkhuyenmai.getModel();
@@ -348,6 +348,7 @@ public class KhuyenMai extends javax.swing.JFrame {
             }
         });
 
+        txtmakhuyenmai.setToolTipText("");
         txtmakhuyenmai.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtmakhuyenmaiActionPerformed(evt);

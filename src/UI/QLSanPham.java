@@ -4,6 +4,15 @@
  */
 package UI;
 
+import Model.Sanpham;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.Statement;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 /**
  *
  * @author nguye
@@ -13,8 +22,15 @@ public class QLSanPham extends javax.swing.JFrame {
     /**
      * Creates new form QLSanPham
      */
+        Connection coon = null ;
+         SERVER.DBHelper db = new SERVER.DBHelper();
+        Model.Sanpham sp = new Model.Sanpham();
+        ArrayList<Sanpham> list = new ArrayList<>();
     public QLSanPham() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        coon = db.getCon();
+        fillDateTable();
     }
 
     /**
@@ -31,7 +47,7 @@ public class QLSanPham extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblsanpham = new javax.swing.JTable();
         jTextField1 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
@@ -71,7 +87,7 @@ public class QLSanPham extends javax.swing.JFrame {
         jTextField6 = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tblcongthuc = new javax.swing.JTable();
         jLabel5 = new javax.swing.JLabel();
         jTextField3 = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
@@ -82,7 +98,7 @@ public class QLSanPham extends javax.swing.JFrame {
 
         jLabel4.setText("Tìm kiếm");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblsanpham.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -90,10 +106,18 @@ public class QLSanPham extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "IDProduct", "ProductName", "IDType", "Price"
             }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Float.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tblsanpham);
 
         jTextField1.setText("Tìm kiếm sản phẩm theo mã");
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
@@ -115,15 +139,15 @@ public class QLSanPham extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 564, Short.MAX_VALUE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jTextField1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -262,8 +286,8 @@ public class QLSanPham extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 531, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 49, Short.MAX_VALUE))
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -453,7 +477,7 @@ public class QLSanPham extends javax.swing.JFrame {
                 .addContainerGap(48, Short.MAX_VALUE))
         );
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tblcongthuc.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -464,7 +488,7 @@ public class QLSanPham extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(tblcongthuc);
 
         jLabel5.setText("Tìm kiếm");
 
@@ -550,7 +574,35 @@ public class QLSanPham extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    void fillDateTable(){
+        DefaultTableModel model = (DefaultTableModel) tblsanpham.getModel();
+        model.setRowCount(0);
+        list.clear();
+        try{
+            String sql = "SELECT * FROM Menu";
+            Statement st = coon.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while(rs.next()){
+                Model.Sanpham sp = new Model.Sanpham();
+                sp.setIDProduct(rs.getInt("IDProduct"));
+                sp.setProductName(rs.getString("ProductName"));
+                sp.setIDType(rs.getString("IDType"));
+                sp.setPrice(rs.getFloat("Price"));
+                list.add(sp);
+            }
+            for(Model.Sanpham ls : list){
+                model.addRow(new Object[]{
+                    ls.getIDProduct(),
+                    ls.getProductName(),
+                    ls.getIDType(),
+                    ls.getPrice()
+                });
+            }
+            tblsanpham.setModel(model);
+        }catch(SQLException e){
+            System.out.println("Erro connect: "+ e.getMessage());
+        } 
+    }
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
@@ -694,8 +746,6 @@ public class QLSanPham extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField10;
     private javax.swing.JTextField jTextField12;
@@ -705,5 +755,7 @@ public class QLSanPham extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField9;
+    private javax.swing.JTable tblcongthuc;
+    private javax.swing.JTable tblsanpham;
     // End of variables declaration//GEN-END:variables
 }
