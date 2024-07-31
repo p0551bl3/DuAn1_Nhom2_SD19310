@@ -177,11 +177,7 @@
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="btnXoa" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="btnMoi1" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="btnMoi" min="-2" max="-2" attributes="0"/>
-                                  </Group>
+                                  <Component id="btnMoi1" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="0" pref="19" max="32767" attributes="0"/>
                           </Group>
@@ -269,10 +265,7 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="btnMoi1" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="btnMoi" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="btnMoi1" min="-2" max="-2" attributes="0"/>
                           <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                               <Component id="rdoNhanVien" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="rdoQuanLi" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -321,14 +314,6 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnMoi1ActionPerformed"/>
-              </Events>
-            </Component>
-            <Component class="javax.swing.JButton" name="btnMoi">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="M&#x1edb;i"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnMoiActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnPrev">

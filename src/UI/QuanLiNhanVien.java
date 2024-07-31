@@ -3,7 +3,23 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package UI;
-
+import java.awt.Image;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import java.sql.Connection;
+import java.sql.Statement;
+import java.sql.ResultSet;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.Vector;
 /**
  *
  * @author tuanh
@@ -13,10 +29,72 @@ public class QuanLiNhanVien extends javax.swing.JFrame {
     /**
      * Creates new form QuanLiNhanVien
      */
+    private DefaultTableModel Model = new DefaultTableModel();
+    Connection conn= null;
+    SERVER.DBHelper db = new SERVER.DBHelper();
+    int cur = -1;
+    
     public QuanLiNhanVien() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        conn = db.getCon();
+         loadData();
+         showRow(cur);
+
     }
 
+    
+    public void loadData(){
+        try {
+            //1. kết nối 
+            PreparedStatement ps = conn.prepareStatement("select * from Employee");
+            ResultSet rs = ps.executeQuery();
+            Model.setRowCount(0);
+            //2. Khai Báo Vector
+            Vector vector = null;
+            while(rs.next()){
+                vector = new Vector();
+                //3. Gán giá trị vào vector
+                vector.add(rs.getString("IDEmployee"));
+                vector.add(rs.getString("UserName"));
+                vector.add(rs.getString("Password"));
+                vector.add(rs.getString("FullName"));
+                vector.add(rs.getBoolean("Phone"));
+                vector.add(rs.getString("Address"));
+                vector.add(rs.getString("Role"));
+                //4. thêm vào table
+                Model.addRow(vector);   
+            }
+            //5.Hiển thị Model lên tblNhanVien
+            tblNhanVien.setModel(Model);
+        } catch (Exception e) {
+        }
+    }
+     public void showRow(int i) {
+        if (i >= 0) {
+            txtMaNhanVien.setText((String) Model.getValueAt(i, 0));
+            txtTenNguoiDung.setText((String) Model.getValueAt(i, 1));
+            txtMatKhau.setText((String) Model.getValueAt(i, 2));
+           txtHovaTen.setText((String) Model.getValueAt(i, 3));
+            txtSoDienThoai.setText((String) Model.getValueAt(i, 4));
+            txtEmail.setText((String) Model.getValueAt(i, 5));
+            txtDiaChi.setText((String) Model.getValueAt(i, 6));
+            
+            
+//            Boolean gioitinh = Boolean.parseBoolean((String) tblNhanVien.getValueAt(i, 4));
+//            if(gioitinh == true){
+//                rdoNam.setSelected(true);
+//            }else{
+//                rdoNu.setSelected(true);
+//            }
+            if (tblNhanVien.getValueAt(i, 7).equals("0")) {
+                rdoNhanVien.setSelected(true);
+            } else if (tblNhanVien.getValueAt(i, 7).equals("1")) {
+                rdoQuanLi.setSelected(true);
+            }
+//            UpdateHinh((String) tblNhanVien.getValueAt(i, 6));
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -35,7 +113,6 @@ public class QuanLiNhanVien extends javax.swing.JFrame {
         btnSua = new javax.swing.JButton();
         btnXoa = new javax.swing.JButton();
         btnMoi1 = new javax.swing.JButton();
-        btnMoi = new javax.swing.JButton();
         btnPrev = new javax.swing.JButton();
         btnNext = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
@@ -119,13 +196,6 @@ public class QuanLiNhanVien extends javax.swing.JFrame {
         btnMoi1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnMoi1ActionPerformed(evt);
-            }
-        });
-
-        btnMoi.setText("Mới");
-        btnMoi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMoiActionPerformed(evt);
             }
         });
 
@@ -246,10 +316,7 @@ public class QuanLiNhanVien extends javax.swing.JFrame {
                                 .addComponent(btnSua)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnXoa))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(btnMoi1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnMoi)))
+                            .addComponent(btnMoi1))
                         .addGap(0, 19, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -325,9 +392,7 @@ public class QuanLiNhanVien extends javax.swing.JFrame {
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnMoi1)
-                        .addComponent(btnMoi))
+                    .addComponent(btnMoi1)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(rdoNhanVien)
                         .addComponent(rdoQuanLi)))
@@ -369,24 +434,78 @@ public class QuanLiNhanVien extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-
+            txtMaNhanVien.setText("");
+            txtTenNguoiDung.setText("");
+            txtMatKhau.setText("");
+            txtHovaTen.setText("");
+            txtSoDienThoai.setText("");
+            txtEmail.setText("");
+            txtDiaChi.setText("");
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
-
+            try {
+            String PreManv = txtMaNhanVien.getText();           
+            String sql = "Update Employee set IDEmployee = '" + txtMaNhanVien.getText() +"',"
+                                                    +"UserName = '"+txtTenNguoiDung.getText()+"',"
+                                                    +"Password = '"+txtMatKhau.getText()+"'," 
+                                                    +"FullName= '"+txtHovaTen.getText()+"',"
+                                                    +"Phone = "+txtSoDienThoai.getText()+"," 
+                                                    +"Email = '"+txtEmail.getText()+"'," 
+                                                    +"Address = '"+txtDiaChi.getText()+"'," 
+                                                    +"Role = "+((rdoNhanVien.isSelected() == true)?1 : 0)+","
+                                                    +"where IDEmployee like '"+PreManv+"'";
+            Statement st = conn.createStatement();
+            st.executeUpdate(sql);
+            JOptionPane.showMessageDialog(this, "Successfully");
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+         loadData();
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
+        try {
+           
+            JOptionPane.showMessageDialog(this, "Are you sure?");
+            String sql = "Delete from Employee Where IDEmployee like '" + txtMaNhanVien.getText() +"'";
+            Statement st = conn.createStatement();
+            st.executeUpdate(sql);
+            JOptionPane.showMessageDialog(this, "Successfully");
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        loadData();
 
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void btnMoi1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoi1ActionPerformed
-        // TODO add your handling code here:
+try {
+            PreparedStatement ps = conn.prepareStatement("insert into Employee values (?,?,?,?,?,?,?)");
+            //1. truyền giá trị từ các cantrol vào đối số
+            ps.setString(1, txtMaNhanVien.getText());
+            ps.setString(2, txtTenNguoiDung.getText());
+            ps.setString(3, txtMatKhau.getText());
+            ps.setString(4, txtHovaTen.getText());
+            ps.setString(5, txtSoDienThoai.getText());
+            ps.setString(6, txtEmail.getText());
+            ps.setString(7, txtDiaChi.getText());
+            //2. Nếu chọn rdoNam.isSelect() = true thì trả về true.. ngược lại trả về false
+            // Nam là true Nữ là false
+            ps.setBoolean(8, (rdoNhanVien.isSelected() == true)?true : false);
+            int kq = ps.executeUpdate();
+            if(kq==1){
+                JOptionPane.showMessageDialog(this, "Thêm thành công");
+            }else{
+                JOptionPane.showMessageDialog(this, "Thêm thất bại !!!");
+            }
+            ps.close();
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Thêm không thành công");
+        }
+        loadData();        // TODO add your handling code here:
     }//GEN-LAST:event_btnMoi1ActionPerformed
-
-    private void btnMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoiActionPerformed
-
-    }//GEN-LAST:event_btnMoiActionPerformed
 
     private void btnPrevActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrevActionPerformed
 
@@ -477,7 +596,6 @@ public class QuanLiNhanVien extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnMoi;
     private javax.swing.JButton btnMoi1;
     private javax.swing.JButton btnNext;
     private javax.swing.JButton btnNext1;

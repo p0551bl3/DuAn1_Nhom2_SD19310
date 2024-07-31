@@ -5,6 +5,8 @@
 package UI;
 
 import Model.Promo;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import javax.swing.table.DefaultTableModel;
 import java.sql.SQLException;
 import java.sql.Connection;
@@ -39,7 +41,13 @@ public class KhuyenMai extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         coon = db.getCon();
         fillDataTable();
-
+        tblkhuyenmai.addMouseListener(new MouseAdapter(){
+            public void mouseClicked(MouseEvent evt){
+                int row = tblkhuyenmai.getSelectedRow();
+                fillEmployeeDetails(row);
+            }
+        });
+        
     }
     
     
@@ -146,6 +154,16 @@ public class KhuyenMai extends javax.swing.JFrame {
 
         }
     }
+    
+    private void fillEmployeeDetails(int rows){
+        txtmakhuyenmai.setText(tblkhuyenmai.getValueAt(rows, 0).toString());
+        txttenkhuyenmai.setText(tblkhuyenmai.getValueAt(rows, 1).toString());
+        txtdiscount.setText(tblkhuyenmai.getValueAt(rows, 2).toString());
+        txtngaybatdau.setText(tblkhuyenmai.getValueAt(rows, 3).toString());
+        txtngayketthuc.setText(tblkhuyenmai.getValueAt(rows, 4).toString());
+        txtmota.setText(tblkhuyenmai.getValueAt(rows, 5).toString());
+
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -202,6 +220,11 @@ public class KhuyenMai extends javax.swing.JFrame {
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+        });
+        tblkhuyenmai.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblkhuyenmaiMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(tblkhuyenmai);
@@ -477,6 +500,11 @@ public class KhuyenMai extends javax.swing.JFrame {
         // TODO add your handling code here:
         update();
     }//GEN-LAST:event_updateActionPerformed
+
+    private void tblkhuyenmaiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblkhuyenmaiMouseClicked
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_tblkhuyenmaiMouseClicked
 
     /**
      * @param args the command line arguments
