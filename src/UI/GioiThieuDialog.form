@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JDialogFormInfo">
+  <Properties>
+    <Property name="defaultCloseOperation" type="int" value="2"/>
+  </Properties>
+  <SyntheticProperties>
+    <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+  </SyntheticProperties>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,1,-62,0,0,2,-91"/>
+  </AuxValues>
+
+  <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
+  <SubComponents>
+    <Container class="javax.swing.JPanel" name="jPanel1">
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+          <BorderConstraints direction="Center"/>
+        </Constraint>
+      </Constraints>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JLabel" name="lblLogo">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/ICON/cfshop.jpg"/>
+            </Property>
+            <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[677, 350]"/>
+            </Property>
+            <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[677, 350]"/>
+            </Property>
+            <Property name="opaque" type="boolean" value="true"/>
+            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[677, 350]"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblLogoMouseClicked"/>
+          </Events>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+              <BorderConstraints direction="First"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Container class="javax.swing.JPanel" name="jPanel2">
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
+              <BorderConstraints direction="Center"/>
+            </Constraint>
+          </Constraints>
+
+          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
+            <Property name="columns" type="int" value="0"/>
+            <Property name="rows" type="int" value="1"/>
+          </Layout>
+          <SubComponents>
+            <Component class="javax.swing.JTextPane" name="txtGioiThieu">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Gi&#x1edb;i thi&#x1ec7;u StayCoffee  StayCoffee l&#xe0; ph&#x1ea7;n m&#x1ec1;m qu&#x1ea3;n l&#xfd; qu&#xe1;n c&#xe0; ph&#xea; hi&#x1ec7;n &#x111;&#x1ea1;i, gi&#xfa;p t&#x1ed1;i &#x1b0;u h&#xf3;a quy tr&#xec;nh v&#x1ead;n h&#xe0;nh v&#xe0; n&#xe2;ng cao hi&#x1ec7;u su&#x1ea5;t kinh doanh. V&#x1edb;i c&#xe1;c t&#xed;nh n&#x103;ng nh&#x1b0; qu&#x1ea3;n l&#xfd; &#x111;&#x1a1;n h&#xe0;ng, thanh to&#xe1;n nhanh ch&#xf3;ng, theo d&#xf5;i t&#x1ed3;n kho ch&#xed;nh x&#xe1;c, v&#xe0; b&#xe1;o c&#xe1;o doanh thu chi ti&#x1ebf;t, StayCoffee mang &#x111;&#x1ebf;n tr&#x1ea3;i nghi&#x1ec7;m s&#x1eed; d&#x1ee5;ng d&#x1ec5; d&#xe0;ng v&#xe0; hi&#x1ec7;u qu&#x1ea3;. Ph&#x1ea7;n m&#x1ec1;m c&#xf2;n h&#x1ed7; tr&#x1ee3; qu&#x1ea3;n l&#xfd; nh&#xe2;n vi&#xea;n, t&#xed;ch h&#x1ee3;p nhi&#x1ec1;u ph&#x1b0;&#x1a1;ng th&#x1ee9;c thanh to&#xe1;n, v&#xe0; c&#xf3; th&#x1ec3; truy c&#x1ead;p t&#x1eeb; nhi&#x1ec1;u thi&#x1ebf;t b&#x1ecb;. StayCoffee l&#xe0; c&#xf4;ng c&#x1ee5; l&#xfd; t&#x1b0;&#x1edf;ng &#x111;&#x1ec3; gi&#xfa;p b&#x1ea1;n qu&#x1ea3;n l&#xfd; qu&#xe1;n c&#xe0; ph&#xea; m&#x1ed9;t c&#xe1;ch chuy&#xea;n nghi&#x1ec7;p v&#xe0; hi&#x1ec7;u qu&#x1ea3;."/>
+                <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[677, 100]"/>
+                </Property>
+                <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[677, 100]"/>
+                </Property>
+                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[677, 100]"/>
+                </Property>
+              </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="txtGioiThieuMouseClicked"/>
+              </Events>
+            </Component>
+          </SubComponents>
+        </Container>
+      </SubComponents>
+    </Container>
+  </SubComponents>
+</Form>

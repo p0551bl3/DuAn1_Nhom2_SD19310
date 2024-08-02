@@ -4,7 +4,7 @@
  */
 package UI;
 
-import Model.Promo;
+import MODEL.Promo;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.table.DefaultTableModel;
@@ -34,7 +34,7 @@ public class KhuyenMai extends javax.swing.JFrame {
         
         Connection coon = null;
         SERVER.DBHelper db = new SERVER.DBHelper();
-        Model.Promo promo = new Model.Promo();
+        MODEL.Promo promo = new MODEL.Promo();
         ArrayList<Promo> list = new ArrayList<>();
     public KhuyenMai() {
         initComponents();
@@ -60,7 +60,7 @@ public class KhuyenMai extends javax.swing.JFrame {
             Statement st = coon.createStatement();
             ResultSet rs = st.executeQuery(sql);
             while(rs.next()){
-                Model.Promo pro = new Model.Promo();
+                MODEL.Promo pro = new MODEL.Promo();
                 pro.setIdpromo(rs.getInt("IDPromo"));
                 pro.setNamepromo(rs.getString("NamePromo"));
                 pro.setDiscountpromo(rs.getString("DiscountPromo"));
@@ -69,7 +69,7 @@ public class KhuyenMai extends javax.swing.JFrame {
                 pro.setDescription(rs.getString("Description"));
                 list.add(pro);
             }
-            for(Model.Promo ls : list ){
+            for(MODEL.Promo ls : list ){
                 model.addRow(new Object[]{
                     ls.getIdpromo(),
                     ls.getNamepromo(),
@@ -197,7 +197,7 @@ public class KhuyenMai extends javax.swing.JFrame {
         txtmota = new javax.swing.JTextField();
         txtmakhuyenmai = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 

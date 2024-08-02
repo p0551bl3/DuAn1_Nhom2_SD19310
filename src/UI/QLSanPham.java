@@ -92,7 +92,7 @@ public class QLSanPham extends javax.swing.JFrame {
         jTextField3 = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
