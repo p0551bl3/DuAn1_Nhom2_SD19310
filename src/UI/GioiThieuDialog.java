@@ -3,7 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
 package UI;
-
+import UTIL.IconLogo;
+import javax.swing.JDialog;
 /**
  *
  * @author Asus
@@ -16,9 +17,11 @@ public class GioiThieuDialog extends javax.swing.JDialog {
     public GioiThieuDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        IconLogo.setDialogIcon(this);//Set icon cho form dialog
         setLocationRelativeTo(null);
     }
 
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

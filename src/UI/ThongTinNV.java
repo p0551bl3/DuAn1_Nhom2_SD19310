@@ -4,6 +4,7 @@
  */
 package UI;
 import java.awt.event.KeyEvent;
+import UTIL.IconLogo;
 /**
  *
  * @author Asus
@@ -15,6 +16,7 @@ public class ThongTinNV extends javax.swing.JFrame {
      */
     public ThongTinNV() {
         initComponents();
+        IconLogo.setFrameIcon(this);
         this.setLocationRelativeTo(null);
     }
 

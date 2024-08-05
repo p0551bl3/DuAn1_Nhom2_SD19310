@@ -21,4 +21,14 @@ public class IconLogo {
             System.out.println("Tài nguyên hình ảnh không tìm thấy!");
         }
     }
+     public static void setDialogIcon(JDialog dialog) {//ham nay ho tro dialogs de setting up logo icon
+        // Tải hình ảnh icon từ tài nguyên
+        URL iconURL = IconLogo.class.getResource("/ICON/coffee-cup.png");
+        if (iconURL != null) {
+            Image icon = Toolkit.getDefaultToolkit().getImage(iconURL);
+            dialog.setIconImage(icon);
+        } else {
+            System.out.println("Tài nguyên hình ảnh không tìm thấy!");
+        }
+    }
 }   

@@ -5,7 +5,7 @@
 package UI;
 
 import javax.swing.JOptionPane;
-
+import UTIL.IconLogo;
 /**
  *
  * @author tuanh
@@ -17,6 +17,7 @@ public class BanHang extends javax.swing.JFrame {
      */
     public BanHang() {
         initComponents();
+        IconLogo.setFrameIcon(this);
         this.setLocationRelativeTo(null);
     }
 

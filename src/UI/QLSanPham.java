@@ -13,6 +13,7 @@ import java.sql.Statement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import UTIL.IconLogo;
 /**
  *
  * @author nguye
@@ -28,6 +29,7 @@ public class QLSanPham extends javax.swing.JFrame {
         ArrayList<Sanpham> list = new ArrayList<>();
     public QLSanPham() {
         initComponents();
+        IconLogo.setFrameIcon(this);
         this.setLocationRelativeTo(null);
         coon = db.getCon();
         fillDateTable();

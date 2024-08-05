@@ -20,7 +20,7 @@ import java.sql.ResultSet;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Vector;
-
+import UTIL.IconLogo;
 /**
  *
  * @author tuanh
@@ -40,6 +40,7 @@ public class QuanLiNhanVien extends javax.swing.JFrame {
     
         public QuanLiNhanVien() {
         initComponents();
+        IconLogo.setFrameIcon(this);
         this.setLocationRelativeTo(null);
         conn = db.getCon();
          init();

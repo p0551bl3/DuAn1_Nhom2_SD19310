@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import javax.management.StringValueExp;
 import java.util.Vector;
 import javax.swing.JOptionPane;
+import UTIL.IconLogo;
 
 
 
@@ -38,6 +39,7 @@ public class KhuyenMai extends javax.swing.JFrame {
         ArrayList<Promo> list = new ArrayList<>();
     public KhuyenMai() {
         initComponents();
+        IconLogo.setFrameIcon(this);
         this.setLocationRelativeTo(null);
         coon = db.getCon();
         fillDataTable();
