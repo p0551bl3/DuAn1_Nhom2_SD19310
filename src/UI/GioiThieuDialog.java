@@ -49,9 +49,11 @@ public class GioiThieuDialog extends javax.swing.JDialog {
         });
         jPanel1.add(lblLogo, java.awt.BorderLayout.PAGE_START);
 
-        jPanel2.setLayout(new java.awt.GridLayout());
+        jPanel2.setLayout(new java.awt.GridLayout(1, 0));
 
-        txtGioiThieu.setText("Giới thiệu StayCoffee  StayCoffee là phần mềm quản lý quán cà phê hiện đại, giúp tối ưu hóa quy trình vận hành và nâng cao hiệu suất kinh doanh. Với các tính năng như quản lý đơn hàng, thanh toán nhanh chóng, theo dõi tồn kho chính xác, và báo cáo doanh thu chi tiết, StayCoffee mang đến trải nghiệm sử dụng dễ dàng và hiệu quả. Phần mềm còn hỗ trợ quản lý nhân viên, tích hợp nhiều phương thức thanh toán, và có thể truy cập từ nhiều thiết bị. StayCoffee là công cụ lý tưởng để giúp bạn quản lý quán cà phê một cách chuyên nghiệp và hiệu quả.");
+        txtGioiThieu.setEditable(false);
+        txtGioiThieu.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        txtGioiThieu.setText("StayCoffee là phần mềm quản lý quán cà phê hiện đại, giúp tối ưu hóa quy trình vận hành và nâng cao hiệu suất kinh doanh. Với các tính năng như quản lý đơn hàng, thanh toán nhanh chóng, theo dõi tồn kho chính xác, và báo cáo doanh thu chi tiết, StayCoffee mang đến trải nghiệm sử dụng dễ dàng và hiệu quả. Phần mềm còn hỗ trợ quản lý nhân viên, tích hợp nhiều phương thức thanh toán, và có thể truy cập từ nhiều thiết bị. StayCoffee là công cụ lý tưởng để giúp bạn quản lý quán cà phê một cách chuyên nghiệp và hiệu quả.");
         txtGioiThieu.setMaximumSize(new java.awt.Dimension(677, 100));
         txtGioiThieu.setMinimumSize(new java.awt.Dimension(677, 100));
         txtGioiThieu.setPreferredSize(new java.awt.Dimension(677, 100));

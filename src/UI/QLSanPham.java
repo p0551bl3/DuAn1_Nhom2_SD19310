@@ -4,7 +4,7 @@
  */
 package UI;
 
-import Model.Sanpham;
+import MODEL.Sanpham;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import java.sql.Connection;
@@ -24,7 +24,7 @@ public class QLSanPham extends javax.swing.JFrame {
      */
         Connection coon = null ;
          SERVER.DBHelper db = new SERVER.DBHelper();
-        Model.Sanpham sp = new Model.Sanpham();
+        MODEL.Sanpham sp = new MODEL.Sanpham();
         ArrayList<Sanpham> list = new ArrayList<>();
     public QLSanPham() {
         initComponents();
@@ -583,14 +583,14 @@ public class QLSanPham extends javax.swing.JFrame {
             Statement st = coon.createStatement();
             ResultSet rs = st.executeQuery(sql);
             while(rs.next()){
-                Model.Sanpham sp = new Model.Sanpham();
+                MODEL.Sanpham sp = new MODEL.Sanpham();
                 sp.setIDProduct(rs.getInt("IDProduct"));
                 sp.setProductName(rs.getString("ProductName"));
                 sp.setIDType(rs.getString("IDType"));
                 sp.setPrice(rs.getFloat("Price"));
                 list.add(sp);
             }
-            for(Model.Sanpham ls : list){
+            for(MODEL.Sanpham ls : list){
                 model.addRow(new Object[]{
                     ls.getIDProduct(),
                     ls.getProductName(),

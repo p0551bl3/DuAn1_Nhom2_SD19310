@@ -4,6 +4,8 @@
  */
 package UI;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author tuanh
@@ -15,6 +17,7 @@ public class BanHang extends javax.swing.JFrame {
      */
     public BanHang() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -57,8 +60,12 @@ public class BanHang extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
 
         jLabel4.setText("jLabel4");
 
@@ -84,7 +91,6 @@ public class BanHang extends javax.swing.JFrame {
 
         jLabel2.setText("Tên Nhân Viên:");
 
-        txtNhanVien.setText("Te");
         txtNhanVien.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNhanVienActionPerformed(evt);
@@ -122,7 +128,7 @@ public class BanHang extends javax.swing.JFrame {
 
         jLabel9.setText("Khuyến mãi:");
 
-        cboKhuynMai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tết Nguyên Đán", "Valentine", "Ngày Quốc Tế Phụ Nữ", "Lễ Phục Sinh", "Ngày Quốc Tế Lao Động", "Ngày Quốc Khánh", "Ngày Nhà Giáo Việt Nam", "Giáng Sinh", "Black Friday", "Cyber Monday" }));
+        cboKhuynMai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Không", "Tết Nguyên Đán", "Valentine", "Ngày Quốc Tế Phụ Nữ", "Lễ Phục Sinh", "Ngày Quốc Tế Lao Động", "Ngày Quốc Khánh", "Ngày Nhà Giáo Việt Nam", "Giáng Sinh", "Black Friday", "Cyber Monday" }));
 
         jLabel11.setText("Tổng Tiền:");
 
@@ -176,11 +182,48 @@ public class BanHang extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(jTable2);
 
-        jMenu1.setText("Giới Thiệu");
-        jMenuBar1.add(jMenu1);
-
         jMenu2.setText("Tài Khoản");
+
+        jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_1, java.awt.event.InputEvent.ALT_DOWN_MASK));
+        jMenuItem3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/Contact-icon.png"))); // NOI18N
+        jMenuItem3.setText("Thông tin tài khoản");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem3);
+
+        jMenuItem4.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_2, java.awt.event.InputEvent.ALT_DOWN_MASK));
+        jMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/Refresh.png"))); // NOI18N
+        jMenuItem4.setText("Đổi mật khẩu");
+        jMenu2.add(jMenuItem4);
+
+        jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_3, java.awt.event.InputEvent.ALT_DOWN_MASK));
+        jMenuItem2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/Exit.png"))); // NOI18N
+        jMenuItem2.setText("Đăng xuất");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem2);
+
         jMenuBar1.add(jMenu2);
+
+        jMenu1.setText("Giới Thiệu");
+
+        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_L, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jMenuItem1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/070537-glossy-black-3d-button-icon-alphanumeric-information2-ps.png"))); // NOI18N
+        jMenuItem1.setText("Giới thiệu chương trình");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem1);
+
+        jMenuBar1.add(jMenu1);
 
         setJMenuBar(jMenuBar1);
         jMenuBar1.getAccessibleContext().setAccessibleName("");
@@ -331,6 +374,25 @@ public class BanHang extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cboKichCoActionPerformed
 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        new GioiThieuDialog(this,true).setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        // TODO add your handling code here:
+        new ThongTinNV().setVisible(true);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+        int click = JOptionPane.showConfirmDialog(null, "Đăng xuất ngay bây giờ?");
+        if (click == 0) {
+            this.setVisible(false);
+            new LoginForm().setVisible(true);
+        }
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -405,6 +467,10 @@ public class BanHang extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;

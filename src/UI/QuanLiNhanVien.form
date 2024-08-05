@@ -167,7 +167,7 @@
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabel7" max="32767" attributes="0"/>
+                          <Component id="lblHinh" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
@@ -177,7 +177,7 @@
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="btnXoa" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="btnMoi1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnLuu" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="0" pref="19" max="32767" attributes="0"/>
                           </Group>
@@ -210,13 +210,13 @@
                   </Group>
                   <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                      <Component id="btnNext2" min="-2" pref="47" max="-2" attributes="0"/>
+                      <Component id="btnFirst" min="-2" pref="55" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnPrev" min="-2" pref="35" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="btnNext" min="-2" pref="35" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnNext1" min="-2" pref="49" max="-2" attributes="0"/>
+                      <Component id="btnLast" min="-2" pref="55" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -254,7 +254,7 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jScrollPane2" min="-2" pref="44" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="jLabel7" max="32767" attributes="0"/>
+                          <Component id="lblHinh" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -265,7 +265,7 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="btnMoi1" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnLuu" min="-2" max="-2" attributes="0"/>
                           <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                               <Component id="rdoNhanVien" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="rdoQuanLi" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -273,10 +273,10 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="btnNext2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnFirst" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btnPrev" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="btnNext" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnNext1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnLast" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="26" max="32767" attributes="0"/>
                   </Group>
@@ -308,12 +308,12 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnXoaActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="btnMoi1">
+            <Component class="javax.swing.JButton" name="btnLuu">
               <Properties>
                 <Property name="text" type="java.lang.String" value="L&#x1b0;u"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnMoi1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLuuActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnPrev">
@@ -434,7 +434,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rdoNhanVienActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JLabel" name="jLabel7">
+            <Component class="javax.swing.JLabel" name="lblHinh">
               <Properties>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
@@ -442,21 +442,24 @@
                   </Border>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblHinhMouseClicked"/>
+              </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="btnNext1">
+            <Component class="javax.swing.JButton" name="btnLast">
               <Properties>
                 <Property name="text" type="java.lang.String" value="&gt;&gt;"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNext1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLastActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="btnNext2">
+            <Component class="javax.swing.JButton" name="btnFirst">
               <Properties>
                 <Property name="text" type="java.lang.String" value="&lt;&lt;"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNext2ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnFirstActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>
