@@ -3,23 +3,121 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package UI;
-
-import javax.swing.JOptionPane;
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import java.sql.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import UTIL.IconLogo;
-/**
- *
- * @author tuanh
- */
+import SERVER.DBHelper;
+import MODEL.BanHang1;
+
 public class BanHang extends javax.swing.JFrame {
 
-    /**
-     * Creates new form BanHang
-     */
+    Connection conn;
+    DefaultTableModel tableModel;
+    BanHang1 banHang1;
+
     public BanHang() {
         initComponents();
         IconLogo.setFrameIcon(this);
         this.setLocationRelativeTo(null);
+        conn = new DBHelper().getCon();
+        banHang1 = new BanHang1();
+        loadDataToTable();
+        setupTableListener();
+        setCurrentDate();
+        setupProductTypeListener();
     }
+
+    private void loadDataToTable() {
+        try {
+            String sql = "SELECT * FROM OrderDetails";
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            
+            tableModel = (DefaultTableModel) jTable2.getModel();
+            tableModel.setRowCount(0);
+            
+            while (rs.next()) {
+                Object[] row = {
+                    rs.getString("IDOrder"),
+                    rs.getString("ProductName"),
+                    rs.getInt("Quantity"),
+                    rs.getString("Size"),
+                    rs.getFloat("Price"),
+                    rs.getInt("Total")
+                };
+                tableModel.addRow(row);
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, "Lỗi: " + e.getMessage());
+        }
+    }
+
+    private void setupTableListener() {
+        jTable2.getSelectionModel().addListSelectionListener(e -> {
+            if (!e.getValueIsAdjusting()) {
+                int selectedRow = jTable2.getSelectedRow();
+                if (selectedRow != -1) {
+                    banHang1.setTenNhanVien(jTable2.getValueAt(selectedRow, 0).toString());
+                    banHang1.setTenSanPham(jTable2.getValueAt(selectedRow, 1).toString());
+                    banHang1.setSoLuong(Integer.parseInt(jTable2.getValueAt(selectedRow, 2).toString()));
+                    banHang1.setKichCo(jTable2.getValueAt(selectedRow, 3).toString());
+                    banHang1.setGiaSanPham(Float.parseFloat(jTable2.getValueAt(selectedRow, 4).toString()));
+                    banHang1.setTongTien(Float.parseFloat(jTable2.getValueAt(selectedRow, 5).toString()));
+                    
+                    updateFields();
+                }
+            }
+        });
+    }
+
+    private void setCurrentDate() {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        txtNgayBan.setText(sdf.format(new Date()));
+    }
+
+    private void setupProductTypeListener() {
+        cboLoaiSanPham.addActionListener(e -> updateProductList());
+    }
+
+    private void updateProductList() {
+        String selectedType = (String) cboLoaiSanPham.getSelectedItem();
+        try {
+            String sql = "SELECT ProductName FROM Menu WHERE IDType = ?";
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setString(1, getIDTypeFromName(selectedType));
+            ResultSet rs = pst.executeQuery();
+
+            cboTenSanPham.removeAllItems();
+            while (rs.next()) {
+                cboTenSanPham.addItem(rs.getString("ProductName"));
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, "Lỗi: " + e.getMessage());
+        }
+    }
+
+    private String getIDTypeFromName(String typeName) {
+        switch (typeName) {
+            case "Cafe": return "T01";
+            case "Trà": return "T02";
+            case "Sinh Tố": return "T03";
+            case "Bánh": return "T04";
+            default: return "";
+        }
+    }
+
+    private void updateFields() {
+        txtNhanVien.setText(banHang1.getTenNhanVien());
+        cboTenSanPham.setSelectedItem(banHang1.getTenSanPham());
+        jspSoLuong.setValue(banHang1.getSoLuong());
+        cboKichCo.setSelectedItem(banHang1.getKichCo());
+        txtGiaSanPham.setText(String.valueOf(banHang1.getGiaSanPham()));
+        txtTongTien.setText(String.valueOf(banHang1.getTongTien()));
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -39,7 +137,6 @@ public class BanHang extends javax.swing.JFrame {
         txtNhanVien = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        txtTenSanPham = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         txtGiaSanPham = new javax.swing.JTextField();
@@ -60,6 +157,7 @@ public class BanHang extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
+        cboTenSanPham = new javax.swing.JComboBox<>();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
@@ -101,12 +199,6 @@ public class BanHang extends javax.swing.JFrame {
         jLabel3.setText("Ngày Bán:");
 
         jLabel5.setText("Tên Sản Phẩm:");
-
-        txtTenSanPham.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTenSanPhamActionPerformed(evt);
-            }
-        });
 
         jLabel6.setText("Số lượng:");
 
@@ -165,6 +257,17 @@ public class BanHang extends javax.swing.JFrame {
         });
 
         btnSua.setText("Sửa");
+        btnSua.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSuaActionPerformed(evt);
+            }
+        });
+
+        txtNgayBan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNgayBanActionPerformed(evt);
+            }
+        });
 
         cboLoaiSanPham.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cafe", "Bánh", "Sinh Tố", "Trà" }));
 
@@ -270,8 +373,8 @@ public class BanHang extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(txtNgayBan, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE)
-                                    .addComponent(txtTenSanPham)
-                                    .addComponent(txtNhanVien))))
+                                    .addComponent(txtNhanVien)
+                                    .addComponent(cboTenSanPham, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -302,8 +405,8 @@ public class BanHang extends javax.swing.JFrame {
                             .addComponent(txtNgayBan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtTenSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cboTenSanPham, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -347,16 +450,29 @@ public class BanHang extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNhanVienActionPerformed
 
-    private void txtTenSanPhamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTenSanPhamActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtTenSanPhamActionPerformed
-
     private void txtGiaSanPhamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtGiaSanPhamActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtGiaSanPhamActionPerformed
 
     private void btnThemVaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemVaoActionPerformed
-        // TODO add your handling code here:
+       try {
+        String sql = "INSERT INTO OrderDetails (IDOrder, ProductName, Quantity, Size, Price, Total) VALUES (?, ?, ?, ?, ?, ?)";
+        PreparedStatement pst = conn.prepareStatement(sql);
+        pst.setString(1, txtNhanVien.getText());
+        pst.setString(2, cboTenSanPham.getSelectedItem().toString());
+        pst.setInt(3, (Integer) jspSoLuong.getValue());
+        pst.setString(4, cboKichCo.getSelectedItem().toString());
+        pst.setFloat(5, Float.parseFloat(txtGiaSanPham.getText()));
+        pst.setFloat(6, Float.parseFloat(txtTongTien.getText()));
+        
+        int rowsAffected = pst.executeUpdate();
+        if (rowsAffected > 0) {
+            JOptionPane.showMessageDialog(this, "Thêm thành công!");
+            loadDataToTable();
+        }
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(this, "Lỗi: " + e.getMessage());
+    }
     }//GEN-LAST:event_btnThemVaoActionPerformed
 
     private void btnThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhToanActionPerformed
@@ -368,7 +484,25 @@ public class BanHang extends javax.swing.JFrame {
     }//GEN-LAST:event_txtTongTienActionPerformed
 
     private void BtnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnXoaActionPerformed
-        // TODO add your handling code here:
+        int selectedRow = jTable2.getSelectedRow();
+    if (selectedRow != -1) {
+        try {
+            String idOrder = jTable2.getValueAt(selectedRow, 0).toString();
+            String sql = "DELETE FROM OrderDetails WHERE IDOrder = ?";
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setString(1, idOrder);
+            
+            int rowsAffected = pst.executeUpdate();
+            if (rowsAffected > 0) {
+                JOptionPane.showMessageDialog(this, "Xóa thành công!");
+                loadDataToTable();
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, "Lỗi: " + e.getMessage());
+        }
+    } else {
+        JOptionPane.showMessageDialog(this, "Vui lòng chọn một dòng để xóa.");
+    }
     }//GEN-LAST:event_BtnXoaActionPerformed
 
     private void cboKichCoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboKichCoActionPerformed
@@ -393,6 +527,37 @@ public class BanHang extends javax.swing.JFrame {
             new LoginForm().setVisible(true);
         }
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void txtNgayBanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNgayBanActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNgayBanActionPerformed
+
+    private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
+        int selectedRow = jTable2.getSelectedRow();
+    if (selectedRow != -1) {
+        try {
+            String idOrder = jTable2.getValueAt(selectedRow, 0).toString();
+            String sql = "UPDATE OrderDetails SET ProductName = ?, Quantity = ?, Size = ?, Price = ?, Total = ? WHERE IDOrder = ?";
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setString(1, cboTenSanPham.getSelectedItem().toString());
+            pst.setInt(2, (Integer) jspSoLuong.getValue());
+            pst.setString(3, cboKichCo.getSelectedItem().toString());
+            pst.setFloat(4, Float.parseFloat(txtGiaSanPham.getText()));
+            pst.setFloat(5, Float.parseFloat(txtTongTien.getText()));
+            pst.setString(6, idOrder);
+            
+            int rowsAffected = pst.executeUpdate();
+            if (rowsAffected > 0) {
+                JOptionPane.showMessageDialog(this, "Cập nhật thành công!");
+                loadDataToTable();
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, "Lỗi: " + e.getMessage());
+        }
+    } else {
+        JOptionPane.showMessageDialog(this, "Vui lòng chọn một dòng để sửa.");
+    }
+    }//GEN-LAST:event_btnSuaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -452,6 +617,7 @@ public class BanHang extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cboKhuynMai;
     private javax.swing.JComboBox<String> cboKichCo;
     private javax.swing.JComboBox<String> cboLoaiSanPham;
+    private javax.swing.JComboBox<String> cboTenSanPham;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -480,7 +646,6 @@ public class BanHang extends javax.swing.JFrame {
     private javax.swing.JTextField txtGiaSanPham;
     private javax.swing.JTextField txtNgayBan;
     private javax.swing.JTextField txtNhanVien;
-    private javax.swing.JTextField txtTenSanPham;
     private javax.swing.JTextField txtTongTien;
     // End of variables declaration//GEN-END:variables
 }

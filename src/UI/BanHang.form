@@ -175,8 +175,8 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="1" max="-2" attributes="0">
                                   <Component id="txtNgayBan" alignment="0" pref="245" max="32767" attributes="0"/>
-                                  <Component id="txtTenSanPham" max="32767" attributes="0"/>
                                   <Component id="txtNhanVien" max="32767" attributes="0"/>
+                                  <Component id="cboTenSanPham" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -218,8 +218,8 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="txtTenSanPham" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel5" alignment="3" min="-2" pref="16" max="-2" attributes="0"/>
+                          <Component id="cboTenSanPham" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -296,11 +296,6 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="T&#xea;n S&#x1ea3;n Ph&#x1ea9;m:"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="txtTenSanPham">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtTenSanPhamActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel6">
       <Properties>
@@ -417,10 +412,16 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="S&#x1eed;a"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSuaActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JSpinner" name="jspSoLuong">
     </Component>
     <Component class="javax.swing.JTextField" name="txtNgayBan">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtNgayBanActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JComboBox" name="cboLoaiSanPham">
       <Properties>
@@ -520,5 +521,15 @@
         </Component>
       </SubComponents>
     </Container>
+    <Component class="javax.swing.JComboBox" name="cboTenSanPham">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="0"/>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
+    </Component>
   </SubComponents>
 </Form>
